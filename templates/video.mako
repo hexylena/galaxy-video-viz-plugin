@@ -12,14 +12,14 @@
     video_x = hda.metadata.resolution_x
     video_y = hda.metadata.resolution_y
 
-    min_width = 550
+    min_width = 600
 
     # If the video is skinnier than min_width px, bump to a minimum of min_width and
     # then scale y appropriately to retain aspect ratio
     # If we do not do this, controls will be hidden on small videos
-    if video_x < min_width:
-        video_x = min_width
-        video_y = (float(min_width)/hda.metadata.resolution_x) * hda.metadata.resolution_y
+    if int(hda.metadata.resolution_x) < int(min_width):
+        video_x = 600
+        video_y = (float(min_width)/float(hda.metadata.resolution_x)) * float(hda.metadata.resolution_y)
 %>
 <!DOCTYPE HTML>
 <html>
@@ -57,7 +57,7 @@ ${h.javascript_link( root + 'plugins/visualizations/video/static/video.js' )}
           { text: '2x', rate: 2 },
         ],
         framebyframe: {
-          fps: 30,
+          fps: ${ hda.metadata.fps },
           steps: [
             { text: '-5', step: -5 },
             { text: '-1', step: -1 },
