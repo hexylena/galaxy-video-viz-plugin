@@ -3,6 +3,10 @@
 
     # Use root for resource loading.
     root = h.url_for( '/' )
+    static = h.url_for(root + 'plugins/visualizations/video/static/')
+
+    # TODO: allow other filetypes
+    dataset_location = h.url_for( root + 'datasets/') + trans.security.encode_id( hda.id ) + "/display/?preview=True&f=.mp4"
 %>
 <!DOCTYPE HTML>
 <html>
@@ -15,14 +19,41 @@ ${h.js( 'libs/jquery/jquery' )}
 ${h.javascript_link( root + 'plugins/visualizations/video/static/video.js' )}
 
 <script>
-    videojs.options.flash.swf = "${h.url_for(root + 'plugins/visualizations/video/static/video-js.swf')}"
+    videojs.options.flash.swf = "${h.url_for(static + 'video-js.swf')}"
 </script>
+<script src="${h.url_for(static + 'video-speed.js')}"></script>
+<script src="${h.url_for(static + 'video-framebyframe.js')}"></script>
 </head>
 <body>
 
     <video id="vid" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" data-setup="{}">
-        <source src="${h.url_for( root + 'datasets/')}${ trans.security.encode_id( hda.id ) }/display/?preview=True&f=.mp4" type='video/mp4' />
+        <source src="${dataset_location}" type='video/mp4' />
         <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
   </video>
+
+  <script type='text/javascript'>
+    var video = videojs("vid", {
+      controls: true,
+      autoplay: false,
+      preload: 'auto',
+      plugins: {
+        speed: [
+          { text: '.25x', rate: 0.25 },
+          { text: '.5x', rate: 0.5 },
+          { text: '1x', rate: 1, selected: true },
+          { text: '2x', rate: 2 },
+        ],
+        framebyframe: {
+          fps: 30,
+          steps: [
+            { text: '-5', step: -5 },
+            { text: '-1', step: -1 },
+            { text: '+1', step: 1 },
+            { text: '+5', step: 5 },
+          ]
+        }
+      }
+    });
+  </script>
 
 </body>
