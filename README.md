@@ -4,7 +4,11 @@ This plugin allows for viewing of videos (mp4 files) directly in the galaxy inte
 
 Galaxy, now with cute cat videos
 
-![https://github.com/erasche/galaxy-video-viz-plugin.git]
+![cat videos](https://github.com/erasche/galaxy-video-viz-plugin.git)
+
+# Requirements
+
+This library depends on the `mp4` [datatype](http://toolshed.g2.bx.psu.edu/view/eric-rasche/video_datatypes)
 
 # Design
 
@@ -22,3 +26,8 @@ git submodule init
 git submodule update
 ```
 
+The submodules are stored in the `ext/` folder. At this point, you should be ready to upload a video file and watch it through galaxy.
+
+# Known Bugs
+
+Currently does not support playback of anything but mp4 files. This is hardcoded, and will change eventually.
