@@ -1,0 +1,3 @@
+[submodule "ext/videojs-speed"]
+	path = ext/videojs-speed
+	url = https://github.com/nicetip/videojs-speed
