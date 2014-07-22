@@ -7,6 +7,19 @@
 
     # TODO: allow other filetypes
     dataset_location = h.url_for( root + 'datasets/') + trans.security.encode_id( hda.id ) + "/display/?preview=True&f=.mp4"
+
+
+    video_x = hda.metadata.resolution_x
+    video_y = hda.metadata.resolution_y
+
+    min_width = 550
+
+    # If the video is skinnier than min_width px, bump to a minimum of min_width and
+    # then scale y appropriately to retain aspect ratio
+    # If we do not do this, controls will be hidden on small videos
+    if video_x < min_width:
+        video_x = min_width
+        video_y = (float(min_width)/hda.metadata.resolution_x) * hda.metadata.resolution_y
 %>
 <!DOCTYPE HTML>
 <html>
@@ -26,7 +39,7 @@ ${h.javascript_link( root + 'plugins/visualizations/video/static/video.js' )}
 </head>
 <body>
 
-    <video id="vid" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" data-setup="{}">
+    <video id="vid" class="video-js vjs-default-skin" controls preload="none" width="${ video_x }" height="${ video_y }" data-setup="{}">
         <source src="${dataset_location}" type='video/mp4' />
         <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
   </video>
