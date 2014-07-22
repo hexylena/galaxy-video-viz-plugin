@@ -4,7 +4,7 @@ This plugin allows for viewing of videos (mp4 files) directly in the galaxy inte
 
 Galaxy, now with cute cat videos
 
-![cat videos](https://github.com/erasche/galaxy-video-viz-plugin.git)
+![cat videos](http://i.imgur.com/CxsDze3.png)
 
 # Requirements
 
