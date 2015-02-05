@@ -1,3 +1,11 @@
+**THIS REPO IS DEPRECATED**
+
+As an IUC member, I decided to move development to the [official IUC tool repository](https://github.com/galaxyproject/tools-iuc/tree/video-viz/visualizations/video)
+until further notice. The below is retained for historical reasons.
+
+
+~~~
+
 # Galaxy Video Viz Plugin
 
 This plugin allows for viewing of videos (mp4 files) directly in the galaxy interface.
